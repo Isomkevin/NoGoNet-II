@@ -6,7 +6,7 @@ let restrictedSites = [];
 
 // Initialize the extension
 chrome.runtime.onInstalled.addListener(async () => {
-    console.log('Restricted Site Detector installed');
+    console.log('NoGoNet II Restricted Site Detector installed');
 
     // Load default restricted sites
     const defaultSites = [
@@ -32,6 +32,7 @@ chrome.storage.onChanged.addListener((changes) => {
     if (changes.restrictedSites) {
         restrictedSites = changes.restrictedSites.newValue;
     }
+    console.log('NoGoNet II Restricted Sites List Changed!');
 });
 
 // Listen for web navigation to check URLs
@@ -74,7 +75,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
         chrome.notifications.create({
             type: 'basic',
             iconUrl: 'assets/icon128.png',
-            title: 'Restricted Site Detected',
+            title: 'Restricted Site Access Detected',
             message: `Access to ${hostname} has been restricted.`
         });
     }

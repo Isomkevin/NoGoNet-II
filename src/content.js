@@ -42,7 +42,7 @@
             <div style="font-size: 64px; color: #d32f2f; margin-bottom: 20px;">⚠️</div>
             <h1 style="color: #d32f2f; margin-bottom: 20px;">Access Restricted</h1>
             <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
-              This website has been blocked by the Restricted Site Detector.
+              This web resource has been blocked by NoGoNet II;.
             </p>
             <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
               Blocked site: ${hostname}

@@ -1,6 +1,7 @@
 // vite.config.js
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import fs from 'fs';
 
 export default defineConfig({
   build: {
@@ -39,7 +40,9 @@ export default defineConfig({
           this.emitFile({
             type: 'asset',
             fileName: `assets/icon${size}.png`,
-            source: '' // You would need to read actual icon files here
+            source: fs.existsSync(resolve(__dirname, `src/assets/icon${size}.png`)) 
+              ? fs.readFileSync(resolve(__dirname, `src/assets/icon${size}.png`)) 
+              : (console.warn(`Warning: src/assets/icon${size}.png is missing`), '')
           });
         });
       }

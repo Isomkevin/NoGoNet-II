@@ -43,5 +43,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       setTimeout(() => {
         status.textContent = '';
       }, 2000);
+      console.log('NoGoNet II Settings saved!');
     });
   });

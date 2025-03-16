@@ -1,79 +1,158 @@
-<!-- / src/blockPage.html -->
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Access Restricted</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 50px;
-        background-color: #f8f9fa;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Restricted</title>
+  <style>
+    /* Reset margin and padding to ensure consistent styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #f8f9fa, #e0e0e0);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+
+    h1 {
+      color: #d32f2f;
+      font-size: 32px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #555;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .icon {
+      font-size: 72px;
+      color: #d32f2f;
+      margin-bottom: 20px;
+      animation: bounce 1.5s ease infinite;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #4285f4, #3367d6);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      border-radius: 50px;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #3367d6, #2a56c6);
+      transform: translateY(-3px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    /* Animation for fade-in */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
       }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Animation for bouncing icon */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Responsive styling */
+    @media (max-width: 600px) {
       .container {
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: white;
-        border-radius: 8px;
         padding: 30px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
+
       h1 {
-        color: #d32f2f;
-        margin-bottom: 20px;
+        font-size: 28px;
       }
+
       p {
         font-size: 16px;
-        line-height: 1.6;
-        margin-bottom: 20px;
       }
+
       .icon {
-        font-size: 64px;
-        color: #d32f2f;
-        margin-bottom: 20px;
+        font-size: 60px;
       }
+
       button {
         padding: 10px 20px;
-        background-color: #4285f4;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
         font-size: 14px;
       }
-      button:hover {
-        background-color: #3367d6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">⚠️</div>
+    <h1>Access Restricted</h1>
+    <p>This web resource has been blocked by NoGoNet II.</p>
+    <p id="site-name"></p>
+    <p>If you believe this is a mistake, please contact your administrator.</p>
+    <button id="goBack">Go Back</button>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get the site name from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const site = urlParams.get('site');
+      
+      // Display the site name
+      if (site) {
+        document.getElementById('site-name').textContent = `Blocked site: ${site}`;
       }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="icon">⚠️</div>
-      <h1>Access Restricted</h1>
-      <p>This website has been blocked by the Restricted Site Detector.</p>
-      <p id="site-name"></p>
-      <p>If you believe this is a mistake, please contact your administrator.</p>
-      <button id="goBack">Go Back</button>
-    </div>
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Get the site name from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const site = urlParams.get('site');
-        
-        // Display the site name
-        if (site) {
-          document.getElementById('site-name').textContent = `Blocked site: ${site}`;
-        }
-        
-        // Handle go back button
-        document.getElementById('goBack').addEventListener('click', () => {
-          history.back();
-        });
+      
+      // Handle go back button
+      document.getElementById('goBack').addEventListener('click', () => {
+        history.back();
       });
-    </script>
-  </body>
-  </html>
+    });
+  </script>
+</body>
+</html>

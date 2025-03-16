@@ -154,6 +154,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Inspired by the need for better online safety tools for families, cyber kiosks and organizations
 
 ---
-
 Made with ❤️ by [Isomkevin](https://github.com/Isomkevin)
+
 Inspired by [NoGoNet](https://github.com/Fadhili5/NoGoNet) by [Fadhili5](https://github.com/Fadhili5)
