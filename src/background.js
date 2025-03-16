@@ -1,4 +1,5 @@
 // src/background.js
+/* global chrome */
 import { blockRestrictedSite, sendSMSNotification } from './utils/restrictedSiteHandler';
 
 // Load restricted site list from storage

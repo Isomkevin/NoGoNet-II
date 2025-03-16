@@ -1,7 +1,10 @@
 // vite.config.js
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import fs from 'fs';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   build: {
@@ -24,11 +27,12 @@ export default defineConfig({
   plugins: [
     {
       name: 'copy-manifest',
-      generateBundle() {
+      async generateBundle() {
+        const manifest = await import('./src/manifest.json', { with: { type: 'json' } });
         this.emitFile({
           type: 'asset',
           fileName: 'manifest.json',
-          source: JSON.stringify(require('./src/manifest.json'), null, 2)
+          source: JSON.stringify(manifest.default, null, 2)
         });
       }
     },
