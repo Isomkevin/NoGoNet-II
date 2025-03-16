@@ -1,0 +1,43 @@
+{
+    "manifest_version": 3,
+    "name": "NoGoNet Restricted Site Detector",
+    "version": "1.0.0",
+    "description": "Detects and blocks harmful websites with SMS notifications",
+    "permissions": [
+        "storage",
+        "webNavigation",
+        "webRequest",
+        "notifications",
+        "tabs"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "action": {
+        "default_popup": "src/popup.html",
+        "default_icon": {
+            "16": "assets/icon16.png",
+            "48": "assets/icon48.png",
+            "128": "assets/icon128.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "icons": {
+        "16": "assets/icon16.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon128.png"
+    }
+}

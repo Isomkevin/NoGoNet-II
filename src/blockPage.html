@@ -1,0 +1,79 @@
+<!-- / src/blockPage.html -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Restricted</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+        background-color: #f8f9fa;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #d32f2f;
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      .icon {
+        font-size: 64px;
+        color: #d32f2f;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4285f4;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      button:hover {
+        background-color: #3367d6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">⚠️</div>
+      <h1>Access Restricted</h1>
+      <p>This website has been blocked by the Restricted Site Detector.</p>
+      <p id="site-name"></p>
+      <p>If you believe this is a mistake, please contact your administrator.</p>
+      <button id="goBack">Go Back</button>
+    </div>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Get the site name from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const site = urlParams.get('site');
+        
+        // Display the site name
+        if (site) {
+          document.getElementById('site-name').textContent = `Blocked site: ${site}`;
+        }
+        
+        // Handle go back button
+        document.getElementById('goBack').addEventListener('click', () => {
+          history.back();
+        });
+      });
+    </script>
+  </body>
+  </html>
