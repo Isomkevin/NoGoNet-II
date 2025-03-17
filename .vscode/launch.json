@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome Extension",
+      "runtimeExecutable": "chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "preLaunchTask": "start-dev-server"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "runtimeExecutable",
+      "description": "Path to Chrome executable if not in PATH"
+    }
+  ]
+}

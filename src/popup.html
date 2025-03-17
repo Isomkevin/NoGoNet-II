@@ -146,8 +146,14 @@
   <label for="guardianPhoneNumber">Guardian Phone Number:</label>
   <input type="text" id="guardianPhoneNumber" placeholder="+1234567890">
 
-  <button id="saveSettings">Save Settings</button>
+  <input type="hidden" id="isAuthenticated" value="false">
+  <button id="saveSettings" disabled>Save Settings</button>
   <div id="status"></div>
+
+  <h2>WebAuthn Admin LogIn</h2>
+  <button id="registerWebAuthn">Register WebAuthn</button>
+  <button id="authenticateWebAuthn">Authenticate with WebAuthn</button>
+  <div id="webauthnStatus"></div>
 
   <script type="module" src="popup.js"></script>
 </body>
