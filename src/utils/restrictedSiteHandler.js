@@ -1,4 +1,5 @@
 // src/utils/restrictedSiteHandler.js
+/* global chrome */
 /**
  * Blocks a restricted site by redirecting to a block page
  * @param {number} tabId - The ID of the tab to block
@@ -6,9 +7,14 @@
  */
 export function blockRestrictedSite(tabId, hostname) {
     // Redirect to local block page
-    chrome.tabs.update(tabId, {
-        url: chrome.runtime.getURL(`src/blockPage.html?site=${encodeURIComponent(hostname)}`)
-    });
+    // Ensure this code runs in a Chrome extension environment
+    if (typeof chrome !== 'undefined' && chrome.tabs && chrome.runtime) {
+        chrome.tabs.update(tabId, {
+            url: chrome.runtime.getURL(`src/blockPage.html?site=${encodeURIComponent(hostname)}`)
+        });
+    } else {
+        console.error('The "chrome" object is not available. Ensure this code runs in a Chrome extension context.');
+    }
 }
 
 /**

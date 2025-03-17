@@ -1,142 +1,271 @@
-<!-- blockPage.html -->
+<!-- src/blockPage.html -->
+ <!-- This is the HTML template for the block page that is displayed when a site is blocked by the extension. -->
+<!-- It contains a message explaining the block, the blocked site, and the category of the block. -->
+<!-- Users can request temporary access to the site by providing a reason for their request. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Access Restricted</title>
+  <title>Access Restricted - NoGoNet II</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset margin and padding to ensure consistent styling */
     * {
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      color: #333;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Roboto', Arial, sans-serif;
-      text-align: center;
-      padding: 60px 20px;
-      background: linear-gradient(135deg, #f8f9fa, #e0e0e0);
-      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
     }
-
+    
     .container {
       max-width: 600px;
-      background-color: #fff;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
       text-align: center;
-      animation: fadeIn 1s ease-out;
+      width: 90%;
     }
-
+    
+    .icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    
     h1 {
       color: #d32f2f;
-      font-size: 32px;
       margin-bottom: 20px;
-      font-weight: 700;
+      font-size: 28px;
     }
-
+    
     p {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.6;
       margin-bottom: 20px;
-      color: #555;
-      max-width: 500px;
-      margin: 0 auto;
     }
-
-    .icon {
-      font-size: 72px;
-      color: #d32f2f;
+    
+    .details {
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      padding: 15px;
       margin-bottom: 20px;
-      animation: bounce 1.5s ease infinite;
+      text-align: left;
     }
-
+    
+    .details p {
+      margin: 5px 0;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
     button {
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #4285f4, #3367d6);
-      color: white;
+      padding: 10px 20px;
       border: none;
-      border-radius: 6px;
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      border-radius: 50px;
-      letter-spacing: 1px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.3s;
     }
-
-    button:hover {
-      background: linear-gradient(135deg, #3367d6, #2a56c6);
-      transform: translateY(-3px);
+    
+    .primary-button {
+      background-color: #4285f4;
+      color: white;
     }
-
-    button:active {
-      transform: translateY(0);
+    
+    .primary-button:hover {
+      background-color: #3367d6;
     }
-
-    /* Animation for fade-in */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    
+    .secondary-button {
+      background-color: #f5f5f5;
+      color: #333;
     }
-
-    /* Animation for bouncing icon */
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
+    
+    .secondary-button:hover {
+      background-color: #e0e0e0;
     }
-
-    /* Responsive styling */
-    @media (max-width: 600px) {
-      .container {
-        padding: 30px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      p {
-        font-size: 16px;
-      }
-
-      .icon {
-        font-size: 60px;
-      }
-
-      button {
-        padding: 10px 20px;
-        font-size: 14px;
-      }
+    
+    .access-form {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+    }
+    
+    .access-form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      min-height: 80px;
+    }
+    
+    /* Theme color variations for different categories */
+    .social-media .icon, .social-media h1 {
+      color: #1877f2;
+    }
+    
+    .adult-content .icon, .adult-content h1 {
+      color: #d32f2f;
+    }
+    
+    .gambling .icon, .gambling h1 {
+      color: #388e3c;
+    }
+    
+    .gaming .icon, .gaming h1 {
+      color: #7b1fa2;
+    }
+    
+    .streaming .icon, .streaming h1 {
+      color: #e53935;
     }
   </style>
-  <script type="module" crossorigin src="./blockPage.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="icon">⚠️</div>
-    <h1>Access Restricted</h1>
-    <p>This web resource has been blocked by NoGoNet II.</p>
-    <p id="site-name"></p>
-    <p>If you believe this is a mistake, please contact your administrator.</p>
-    <button id="goBack">Go Back</button>
+  <div class="container" id="blockContainer">
+    <div class="icon" id="blockIcon">⚠️</div>
+    <h1 id="blockTitle">Access Restricted</h1>
+    <p id="blockMessage">This web resource has been blocked by NoGoNet II.</p>
+    
+    <div class="details">
+      <p>Blocked site: <strong id="blockedSite"></strong></p>
+      <p id="categoryInfo" style="display: none;">Category: <strong id="blockedCategory"></strong></p>
+      <p id="blockTime">Block time: <span></span></p>
+    </div>
+    
+    <div class="buttons">
+      <button class="primary-button" onclick="history.back()">Go Back</button>
+      <button class="secondary-button" onclick="toggleAccessRequest()">Request Access</button>
+    </div>
+    
+    <div class="access-form" id="accessForm">
+      <h3>Request Temporary Access</h3>
+      <p>Please explain why you need access to this site:</p>
+      <textarea id="accessReason" placeholder="I need access to this site because..."></textarea>
+      <div class="buttons">
+        <button class="primary-button" onclick="submitAccessRequest()">Submit Request</button>
+        <button class="secondary-button" onclick="toggleAccessRequest()">Cancel</button>
+      </div>
+    </div>
   </div>
+  
+  <script>
+    // Get blocked site from URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const site = params.get('site');
+    const category = params.get('category') || '';
+    const reason = params.get('reason') || 'manual_block';
+    
+    // Update UI with site info
+    document.getElementById('blockedSite').textContent = site || 'Unknown';
+    document.getElementById('blockTime').querySelector('span').textContent = new Date().toLocaleString();
+    
+    // Set category-specific information if available
+    if (category) {
+      document.getElementById('categoryInfo').style.display = 'block';
+      document.getElementById('blockedCategory').textContent = category;
+      
+      // Apply category-specific styling
+      const containerEl = document.getElementById('blockContainer');
+      const iconEl = document.getElementById('blockIcon');
+      const categoryClass = category.toLowerCase().replace(/\s+/g, '-');
+      
+      containerEl.classList.add(categoryClass);
+      
+      // Set category-specific icons and messages
+      switch (categoryClass) {
+        case 'social-media':
+          iconEl.textContent = '🙅';
+          document.getElementById('blockMessage').textContent = 
+            'Access to social media sites is currently restricted.';
+          break;
+        case 'adult-content':
+          iconEl.textContent = '🔞';
+          document.getElementById('blockMessage').textContent = 
+            'This site contains age-restricted or inappropriate content.';
+          break;
+        case 'gambling':
+          iconEl.textContent = '🎰';
+          document.getElementById('blockMessage').textContent = 
+            'Gambling websites are restricted.';
+          break;
+        case 'gaming':
+          iconEl.textContent = '🎮';
+          document.getElementById('blockMessage').textContent = 
+            'Gaming websites are currently restricted.';
+          break;
+        case 'streaming':
+          iconEl.textContent = '📺';
+          document.getElementById('blockMessage').textContent = 
+            'Streaming media sites are currently restricted.';
+          break;
+      }
+    }
+    
+    // Record this block in the access log
+    function recordBlockEvent() {
+      chrome.runtime.sendMessage({
+        action: 'recordBlockEvent',
+        data: {
+          site: site,
+          category: category,
+          timestamp: Date.now(),
+          reason: reason
+        }
+      });
+    }
+    
+    // Toggle access request form
+    function toggleAccessRequest() {
+      const form = document.getElementById('accessForm');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+    
+    // Submit access request
+    function submitAccessRequest() {
+      const reason = document.getElementById('accessReason').value;
+      
+      if (!reason || reason.trim().length < 10) {
+        alert('Please provide a detailed reason for your request.');
+        return;
+      }
+      
+      chrome.runtime.sendMessage({
+        action: 'accessRequest',
+        data: {
+          site: site,
+          category: category,
+          reason: reason,
+          timestamp: Date.now()
+        }
+      }, (response) => {
+        if (response && response.success) {
+          alert('Your request has been submitted. You will be notified when it is reviewed.');
+          toggleAccessRequest();
+        } else {
+          alert('There was an error submitting your request. Please try again later.');
+        }
+      });
+    }
+    
+    // Record this block when the page loads
+    document.addEventListener('DOMContentLoaded', recordBlockEvent);
+  </script>
 </body>
 </html>
