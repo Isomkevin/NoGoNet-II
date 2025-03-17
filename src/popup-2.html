@@ -35,8 +35,7 @@
       margin-bottom: 15px;
     }
 
-    input,
-    textarea {
+    input, textarea {
       width: 100%;
       padding: 10px;
       font-size: 14px;
@@ -46,8 +45,7 @@
       transition: border-color 0.3s;
     }
 
-    input:focus,
-    textarea:focus {
+    input:focus, textarea:focus {
       border-color: #4285f4;
       outline: none;
     }
@@ -100,11 +98,11 @@
       border-radius: 50%;
     }
 
-    input:checked+.slider {
+    input:checked + .slider {
       background-color: #4285f4;
     }
 
-    input:checked+.slider:before {
+    input:checked + .slider:before {
       transform: translateX(14px);
     }
 
@@ -143,54 +141,16 @@
       display: none;
     }
 
-    #siteList {
+    .new-site-input-container {
       margin-top: 10px;
-      padding: 0;
-      list-style: none;
-    }
-
-    #siteList li {
-      background: #e9ecef;
-      padding: 8px;
-      border-radius: 4px;
-      margin-bottom: 5px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      gap: 5px;
     }
-
-    .removeSite {
-      background: red;
-      color: white;
-      border: none;
-      padding: 5px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .removeSite:hover {
-      background: darkred;
-    }
-
-    .input-group {
+    .new-site-input {
+      margin-top: 10px;
       display: flex;
-      align-items: center;
-      gap: 10px; /* Adjust spacing between input and button */
+      gap: 5px;
     }
-
-    .input-group input {
-      flex: 1; /* Make the input take up remaining space */
-    }
-
-    .input-group button {
-      flex-shrink: 0; /* Prevent the button from shrinking */
-      padding: 5px 10px; /* Reduce padding for a smaller button */
-      font-size: 14px; /* Adjust font size */
-      width: auto; /* Ensure the button width is not stretched */
-      height: auto; /* Adjust height to fit content */
-      line-height: 1; /* Align text properly */
-    }
-
   </style>
 </head>
 
@@ -208,18 +168,17 @@
   <div id="mainUI" class="hidden">
     <h1>🚫 NoGoNet-II</h1>
 
-    <div class="card">
+      <div class="new-site-input">
       <label for="restrictedSites">Restricted Sites (one per line):</label>
-      <textarea id="restrictedSites" placeholder="example.com&#10;another-site.com"></textarea>
-    </div>
-
-    <div class="card">
-      <label for="newSiteInput">Add a Site:</label>
-      <div class="input-group">
-        <input type="text" id="newSiteInput" placeholder="Enter site (e.g., example.com)">
-        <button id="addSiteButton">+</button>
+      <textarea id="restrictedSites" placeholder="example.com&#10;another-site.com" rows="5"></textarea>
+    
+      <div class="new-site-input-container">
+      <div style="margin-top: 10px; display: flex; gap: 5px;">
+        <input type="text" id="newSiteInput" placeholder="Enter site URL">
+        <button id="addSiteButton">Add</button>
       </div>
     </div>
+    
 
     <div class="card">
       <div class="toggle">

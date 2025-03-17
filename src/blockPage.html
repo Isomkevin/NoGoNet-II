@@ -1,3 +1,4 @@
+<!-- blockPage.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,6 +127,7 @@
       }
     }
   </style>
+  <script type="module" crossorigin src="./blockPage.js"></script>
 </head>
 <body>
   <div class="container">
@@ -136,23 +138,5 @@
     <p>If you believe this is a mistake, please contact your administrator.</p>
     <button id="goBack">Go Back</button>
   </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Get the site name from the URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const site = urlParams.get('site');
-      
-      // Display the site name
-      if (site) {
-        document.getElementById('site-name').textContent = `Blocked site: ${site}`;
-      }
-      
-      // Handle go back button
-      document.getElementById('goBack').addEventListener('click', () => {
-        history.back();
-      });
-    });
-  </script>
 </body>
 </html>

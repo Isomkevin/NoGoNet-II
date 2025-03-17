@@ -6,6 +6,19 @@ import fs from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+function emitFileIfExists(context, filePath, fileName) {
+  const fullPath = resolve(__dirname, filePath);
+  if (fs.existsSync(fullPath)) {
+    context.emitFile({
+      type: 'asset',
+      fileName,
+      source: fs.readFileSync(fullPath),
+    });
+  } else {
+    console.warn(`Warning: ${filePath} is missing`);
+  }
+}
+
 export default defineConfig({
   build: {
     outDir: 'dist',
@@ -39,17 +52,18 @@ export default defineConfig({
     {
       name: 'copy-assets',
       generateBundle() {
-        // Copy icon files - you would need actual icons in these locations
         ['16', '48', '128'].forEach(size => {
-          this.emitFile({
-            type: 'asset',
-            fileName: `assets/icon${size}.png`,
-            source: fs.existsSync(resolve(__dirname, `src/assets/icon${size}.png`)) 
-              ? fs.readFileSync(resolve(__dirname, `src/assets/icon${size}.png`)) 
-              : (console.warn(`Warning: src/assets/icon${size}.png is missing`), '')
-          });
+          emitFileIfExists(this, `src/assets/icon${size}.png`, `assets/icon${size}.png`);
         });
       }
-    }
+    },
+    {
+      name: 'copy-helper-js',
+      generateBundle() {
+        ['blockPage'].forEach(file_name => {
+          emitFileIfExists(this, `src/${file_name}.js`, `${file_name}.js`);
+        });
+      }
+    },
   ]
 });
