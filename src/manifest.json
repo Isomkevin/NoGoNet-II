@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "NoGoNet II Restricted Site Detector",
-    "version": "1.0.0",
+    "name": "NoGoNet II: Restricted Site Detector",
+    "version": "1.0.3",
     "description": "Detects and blocks harmful websites with SMS notifications and other workflows",
     "permissions": [
         "storage",

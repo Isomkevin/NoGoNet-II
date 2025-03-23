@@ -7,7 +7,7 @@ let restrictedSites = [];
 
 // Initialize the extension
 chrome.runtime.onInstalled.addListener(async () => {
-    console.log('NoGoNet II Restricted Site Detector installed');
+    console.log('NoGoNet II installed');
 
     // Load default restricted sites
     const defaultSites = [
